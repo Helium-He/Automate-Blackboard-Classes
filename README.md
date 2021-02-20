@@ -10,3 +10,4 @@ Automating Blackboard classes using Python and Selenium.
 * In line 28 and 29 in class.py enter the username and password
 * pip install Selenium
 * python class.py
+## Note: Make sure to change timetable according to your classes
