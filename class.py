@@ -49,6 +49,8 @@ def startclass(class_name,class_id,end_time):
                 searchBar = browser.find_element_by_tag_name('input')
                 # searchBar = browser.find_element(by='tag',value='input')
                 searchBar.send_keys(Keys.PAGE_DOWN)
+                time.sleep(1)
+                searchBar.send_keys(Keys.PAGE_UP)
             except Exception as e:
                 continue
             continue
@@ -117,24 +119,38 @@ def get_weekday():
 
 if __name__ == '__main__':
     # YOu may need to change these acc to your requirements
-    courseid_BDS_Lab_Grp_A = 'course-link-_19240_1'
-    course_id_CL_SEC_LAB_GRP_A = 'course-link-_19244_1'
-    courseid_OPN_ELE = 'course-link-_22314_1'
-
-    courseid_CL_SEC  = 'course-link-_19243_1'
-    course_id_CAP_PRO = 'course-link-_22259_1'
-    course_id_BD_SEC = 'course-link-_19239_1'
+    courseid_BDS_Lab_Grp_A = 'course-list-course-_23296_1'
+    course_id_CL_SEC_LAB_GRP_A = 'course-list-course-_23300_1'
+    courseid_OPN_ELE = 'course-list-course-_22314_1'
+    courseid_CL_SEC  = 'course-list-course-_23298_1'
+    course_id_CAP_PRO = 'course-list-course-_23313_1'
+    course_id_BD_SEC = 'course-list-course-_23295_1'
     #This is my timetable but you can add your own time table
+    if get_weekday() == 'Tuesday':
+        while datetime.now()<datetime.now().replace(hour=15, minute=30):
+            if datetime.now()>=datetime.now().replace(hour=9, minute=47) and datetime.now()<datetime.now().replace(hour=10, minute=45):
+                startclass('CS LAB',course_id_CL_SEC_LAB_GRP_A,datetime.now().replace(hour=10, minute=45) )
+            elif datetime.now()>=datetime.now().replace(hour=10, minute=47) and datetime.now()<datetime.now().replace(hour=11, minute=45):
+                startclass('CS LAB',course_id_CL_SEC_LAB_GRP_A,datetime.now().replace(hour=11, minute=45) )
+            elif datetime.now()>=datetime.now().replace(hour=13, minute=32) and datetime.now()<datetime.now().replace(hour=14, minute=30):
+                startclass('Big Data Lab',courseid_BDS_Lab_Grp_A,datetime.now().replace(hour=14, minute=30) )
+            elif datetime.now()>=datetime.now().replace(hour=14, minute=32) and datetime.now()<datetime.now().replace(hour=15, minute=30):
+                startclass('Big Data Lab',courseid_BDS_Lab_Grp_A,datetime.now().replace(hour=15, minute=30) )
+                break
+            else:
+                print('waiting for class')
+                time.sleep(30)
+                continue
     if get_weekday() == 'Wednesday':
         while datetime.now()<datetime.now().replace(hour=16, minute=30):
-            if datetime.now()>=datetime.now().replace(hour=9, minute=47) and datetime.now()<datetime.now().replace(hour=10, minute=45):
-                startclass('Big Data LAB',courseid_BDS_Lab_Grp_A,datetime.now().replace(hour=10, minute=45) )
-            elif datetime.now()>=datetime.now().replace(hour=10, minute=47) and datetime.now()<datetime.now().replace(hour=11, minute=45):
-                startclass('Big Data LAB',courseid_BDS_Lab_Grp_A,datetime.now().replace(hour=11, minute=45) )
+            if datetime.now()>=datetime.now().replace(hour=10, minute=47) and datetime.now()<datetime.now().replace(hour=11, minute=45):
+                startclass('Big Data',course_id_BD_SEC,datetime.now().replace(hour=11, minute=45) )
+            elif datetime.now()>=datetime.now().replace(hour=13, minute=32) and datetime.now()<datetime.now().replace(hour=14, minute=30):
+                startclass('Big Data',course_id_BD_SEC,datetime.now().replace(hour=14, minute=30) )
             elif datetime.now()>=datetime.now().replace(hour=14, minute=32) and datetime.now()<datetime.now().replace(hour=15, minute=30):
-                startclass('OE',courseid_OPN_ELE,datetime.now().replace(hour=15, minute=30) )
+                startclass('OE',courseid_CL_SEC,datetime.now().replace(hour=15, minute=30) )
             elif datetime.now()>=datetime.now().replace(hour=15, minute=32) and datetime.now()<datetime.now().replace(hour=16, minute=30):
-                startclass('cloud Security',courseid_CL_SEC,datetime.now().replace(hour=16, minute=30) )
+                startclass('Cloud Sec',courseid_CL_SEC,datetime.now().replace(hour=16, minute=30) )
                 break
             else:
                 print('waiting for class')
@@ -144,6 +160,8 @@ if __name__ == '__main__':
         while datetime.now()<datetime.now().replace(hour=16, minute=30):
             if datetime.now()>=datetime.now().replace(hour=9, minute=47) and datetime.now()<datetime.now().replace(hour=10, minute=45):
                 startclass('Capstone project',course_id_CAP_PRO,datetime.now().replace(hour=10, minute=45) )
+            elif datetime.now()>=datetime.now().replace(hour=11, minute=47) and datetime.now()<datetime.now().replace(hour=12, minute=45):
+                startclass('Cloud Security',courseid_CL_SEC,datetime.now().replace(hour=12, minute=45) )
             elif datetime.now()>=datetime.now().replace(hour=13, minute=32) and datetime.now()<datetime.now().replace(hour=14, minute=30):
                 startclass('Cloud Security',courseid_CL_SEC,datetime.now().replace(hour=14, minute=30) )
             elif datetime.now()>=datetime.now().replace(hour=14, minute=32) and datetime.now()<datetime.now().replace(hour=15, minute=30):
@@ -157,26 +175,9 @@ if __name__ == '__main__':
                 continue
 
     elif get_weekday() == 'Friday':
-        while datetime.now()<=datetime.now().replace(hour=16, minute=30):
-            if datetime.now()>=datetime.now().replace(hour=11, minute=47) and datetime.now()<datetime.now().replace(hour=12, minute=45):
-                startclass('Big Data Security',course_id_BD_SEC,datetime.now().replace(hour=12, minute=45) )
-            elif datetime.now()>=datetime.now().replace(hour=14, minute=32) and datetime.now()<datetime.now().replace(hour=15, minute=30):
+        while datetime.now()<=datetime.now().replace(hour=15, minute=30):
+            if datetime.now()>=datetime.now().replace(hour=14, minute=32) and datetime.now()<datetime.now().replace(hour=15, minute=30):
                 startclass('OE',courseid_OPN_ELE,datetime.now().replace(hour=15, minute=30) )
-            elif datetime.now()>=datetime.now().replace(hour=15, minute=32) and datetime.now()<datetime.now().replace(hour=16, minute=30):
-                startclass('Big Data Security',course_id_BD_SEC,datetime.now().replace(hour=16, minute=30) )
-                break
-            else:
-                print('waiting for class')
-                time.sleep(30)
-                continue
-    elif get_weekday() == 'Saturday':
-        while datetime.now()<=datetime.now().replace(hour=14, minute=30):
-            if datetime.now()>=datetime.now().replace(hour=9, minute=47) and datetime.now()<datetime.now().replace(hour=10, minute=45):
-                startclass('Cloud Security lab',course_id_CL_SEC_LAB_GRP_A,datetime.now().replace(hour=10, minute=45) )
-            elif datetime.now()>=datetime.now().replace(hour=10, minute=47) and datetime.now()<datetime.now().replace(hour=11, minute=45):
-                startclass('Cloud Security lab',course_id_CL_SEC_LAB_GRP_A,datetime.now().replace(hour=11, minute=45) )
-            elif datetime.now()>=datetime.now().replace(hour=13, minute=32) and datetime.now()<datetime.now().replace(hour=14, minute=30):
-                startclass('Cloud Security',courseid_CL_SEC,datetime.now().replace(hour=14, minute=30))
                 break
             else:
                 print('waiting for class')
